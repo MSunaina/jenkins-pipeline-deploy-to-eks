@@ -11,9 +11,9 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
-                        sh "terraform init"
-                        sh "terraform plan"
-                        sh "terraform apply --auto-approve"
+                        sh 'terraform init'
+                        sh 'terraform plan'
+                        sh 'terraform $action --auto-approve'
                     }
                 }
             }
@@ -22,9 +22,9 @@ pipeline {
             steps {
                 script {
                     dir('kubernetes') {
-                        sh "aws eks update-kubeconfig --name myapp-eks-cluster"
-                        sh "kubectl apply -f nginx-deployment.yaml"
-                        sh "kubectl apply -f nginx-service.yaml"
+                        sh 'aws eks update-kubeconfig --name myapp-eks-cluster'
+                        sh 'kubectl apply -f nginx-deployment.yaml'
+                        sh 'kubectl apply -f nginx-service.yaml'
                     }
                 }
             }
