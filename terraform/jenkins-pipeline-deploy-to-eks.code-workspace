@@ -1,0 +1,9 @@
+{
+	"folders": [
+		{
+			"name": "jenkins-pipeline-deploy-to-eks",
+			"path": ".."
+		}
+	],
+	"settings": {}
+}
