@@ -1,3 +1,27 @@
+#EKS
+
+module "eks" {
+  source                         = "terraform-aws-modules/eks/aws"
+  cluster_name                   = "my-eks-cluster"
+  cluster_version                = "1.29"
+  cluster_endpoint_public_access = true
+  vpc_id                         = module.vpc.vpc_id
+  subnet_ids                     = module.vpc.private_subnets
+
+  eks_managed_node_groups = {
+    nodes = {
+      min_size       = 1
+      max_size       = 3
+      desired_size   = 2
+      instance_types = var.instance_types
+    }
+  }
+  tags = {
+    Environment = "dev"
+    Terraform   = "true"
+  }
+}
+
 #Vpc
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
@@ -26,29 +50,5 @@ module "vpc" {
     "kubernetes.io/cluster/my-eks-cluster" = "shared"
     "kubernetes.io/role/private_elb"       = 1
 
-  }
-}
-
-#EKS
-
-module "eks" {
-  source                         = "terraform-aws-modules/eks/aws"
-  cluster_name                   = "my-eks-cluster"
-  cluster_version                = "1.29"
-  cluster_endpoint_public_access = true
-  vpc_id                         = module.vpc.vpc_id
-  subnet_ids                     = module.vpc.private_subnets
-
-  eks_managed_node_groups = {
-    nodes = {
-      min_size       = 1
-      max_size       = 3
-      desired_size   = 2
-      instance_types = var.instance_types
-    }
-  }
-  tags = {
-    Environment = "dev"
-    Terraform   = "true"
   }
 }
