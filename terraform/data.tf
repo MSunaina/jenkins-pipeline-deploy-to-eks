@@ -1,1 +1,1 @@
-data "aws_availability_zones" "azs" {}
+data "aws_ami" "latest-amazon-linux-image"
