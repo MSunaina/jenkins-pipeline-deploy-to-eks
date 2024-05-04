@@ -5,7 +5,7 @@ module "vpc" {
   name = "eks_cluster_vpc"
   cidr = var.vpc_cidr
 
-  azs             = data.aws_availability_zones.azs.names
+  azs             = data.aws_ami.azs.names
   public_subnets  = var.public_subnets
   private_subnets = var.private_subnets
 
